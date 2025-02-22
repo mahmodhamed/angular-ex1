@@ -1,0 +1,29 @@
+.side-bar{
+    display: flex;
+    width: 200px;
+    height: 100%;
+    background-color: #7784ff;
+}
+
+.list-container ul {
+    position: relative;
+    top: 20px;
+    right: 10px;
+    list-style-type: none; 
+}
+
+.list-container li {
+    margin-bottom: 15px; 
+    font-size: 33px; 
+    color:rgb(126, 83, 23);
+}
+
+
+.list-container li:hover {
+    cursor: pointer;
+}
+
+.active{
+    background-color: aliceblue;
+    border-radius: 10%;
+}

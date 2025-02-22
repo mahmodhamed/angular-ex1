@@ -1,0 +1,7 @@
+<div class="side-bar">
+    <div class="list-container">
+        <ul *ngFor="let item of items; let i = index">
+            <li [ngClass]="{'active': activeItemIndex===i}">{{item}}</li>
+        </ul>
+    </div>
+</div>

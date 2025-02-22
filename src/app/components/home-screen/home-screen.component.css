@@ -1,0 +1,43 @@
+.main-container {
+    display: flex;
+    padding: 20px;
+}
+
+.child-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 20%;
+    background-color: rgb(148, 133, 98);
+    margin-right: 20px; /* Adds space to the right of each child */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+}
+.item-container {
+    display: flex;
+    flex-direction: column; /* Stack child and price vertically */
+    align-items: center; /* Center the items horizontally */
+}
+
+
+.child-container:hover{
+    width: 200px;
+    cursor: pointer;
+    height: 200px;
+}
+
+.child-container:hover img {
+    transform: scale(1.3); /* Adjust the scale factor as needed */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Remove the margin from the last child to avoid extra spacing */
+.child-container:last-child {
+    margin-right: 0;
+}
