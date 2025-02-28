@@ -6,6 +6,7 @@ import { HomeScreenComponent } from './components/home-screen/home-screen.compon
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { FormsModule } from '@angular/forms';
+import { ImagezoomComponent } from './imagezoom/imagezoom.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     HomeScreenComponent,
     NavBarComponent,
     SideBarComponent,
+    ImagezoomComponent,
   ],
   imports: [
     FormsModule,
