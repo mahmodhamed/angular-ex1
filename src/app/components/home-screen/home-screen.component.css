@@ -56,13 +56,45 @@
 .wagon img {
     width: 120px;
     height: 120px;
-    cursor: pointer; /* Makes it interactive */
+    cursor: pointer; 
 }
 
 .salary {
     margin-top: 5px;
     font-size: 18px;
     font-weight: bold;
-    color: #fd0000; /* Change as needed */
+    color: #fd0000; 
 }
 
+.addTocart {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; 
+    color: #fff; 
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .addTocart:hover {
+    background-color: #0056b3; 
+    transform: scale(1.05); 
+  }
+  
+  .addTocart:active {
+    background-color: #003f7f; 
+    transform: scale(1);
+  }
+  
+  .addTocart .price {
+    margin-bottom: 5px; 
+  }
+  
+  .addTocart .price:last-child {
+    font-weight: normal;
+    font-size: 14px;
+  }
+  

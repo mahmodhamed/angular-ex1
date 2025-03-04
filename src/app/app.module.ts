@@ -7,6 +7,11 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { FormsModule } from '@angular/forms';
 import { ImagezoomComponent } from './imagezoom/imagezoom.component';
+import { AppRoutingModule } from './app-routing.module';
+import { MyCartComponent } from './components/my-cart/my-cart.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { ItemInfoComponent } from './components/item-info/item-info.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +20,15 @@ import { ImagezoomComponent } from './imagezoom/imagezoom.component';
     NavBarComponent,
     SideBarComponent,
     ImagezoomComponent,
+    MyCartComponent,
+    AboutComponent,
+    ContactUsComponent,
+    ItemInfoComponent,
   ],
   imports: [
     FormsModule,
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home-screen',
@@ -11,6 +12,7 @@ export class HomeScreenComponent {
     wagonimg = "assets/icons/wagon.png";
     salary = 0;
     cartItems: any[] = []; // Stores selected items
+   
   
     items = [
       { img: "assets/icons/mugitem.png", price: 30,name:"cup" },
@@ -24,15 +26,25 @@ export class HomeScreenComponent {
     ];
   
     // Function to add an item to the cart
+    // addToCart(item: any) {
+    //   this.cartItems.push(item); 
+    //   this.salary += item.price
+    // }
+
+    // addToCart(item: any) {
+    //   this.cartItems.push(item);
+    // }
     addToCart(item: any) {
-      this.cartItems.push(item); 
-      this.salary += item.price
+      let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      cart.push(item);
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
+    
   
     // Function to show cart items
-    showCartItems() {
-      alert(this.cartItems.map(item => `${item.price} - ${item.name}`).join("\n"));
-    }
+    // showCartItems() {
+    //   alert(this.cartItems.map(item => `${item.price} - ${item.name}`).join("\n"));
+    // }
   }
 
 

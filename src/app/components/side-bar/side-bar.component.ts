@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
 })
 export class SideBarComponent {
   activeItemIndex = 0;
-  items=["My Cart", "Products", "About", "Contact us"]
+  items = [
+    { name: "My Cart", path: "/cart" },
+    { name: "Products", path: "/products" },
+    { name: "About", path: "/about" },
+    { name: "Contact us", path: "/contact" }
+  ];
 }
