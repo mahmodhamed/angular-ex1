@@ -13,10 +13,6 @@ export class LoginComponent {
 
   constructor(private loggerService: LoginService, private router: Router){}
   onLogin(){
-    if (this.loggerService.login(this.email, this.password)) {
-      this.router.navigate(['/shop']); 
-    } else {
-      alert('Invalid credentials');
-    }
+    this.loggerService.login(this.email,this.password);
   }
 }

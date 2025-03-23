@@ -15,7 +15,7 @@ export class ShopService {
 
   constructor(private http: HttpClient) {
     console.log("FETCHING")
-    this.getProducts()
+    // this.getProducts()
     this.getCartTotal()
   }
 

@@ -13,9 +13,10 @@ import { ShopComponent } from './components/shop/shop.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CartComponent } from './components/cart/cart.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AddProductComponent } from './components/add-product/add-product.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component'; // Import HttpClientModule
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,13 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
     HttpClientModule ,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:InterceptorService,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
