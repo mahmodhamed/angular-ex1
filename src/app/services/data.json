@@ -1,0 +1,17 @@
+{
+    "productsList": [
+      {
+        "id": 0,
+        "title": "Book",
+        "price": 100
+        
+      },
+      {
+        "id": 1,
+        "title": "Computer",
+        "price": 120
+        
+      }
+    ]
+  }
+  

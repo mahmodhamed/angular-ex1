@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeScreenComponent } from './components/home-screen/home-screen.component';
-import { MyCartComponent } from './components/my-cart/my-cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
-import { ItemInfoComponent } from './components/item-info/item-info.component';
+import { CartComponent } from './components/cart/cart.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ShopComponent } from './components/shop/shop.component';
 
 const routes: Routes = [
-  { path: "products", component: HomeScreenComponent },
-  { path: "cart", component: MyCartComponent },
-  { path: "about", component: AboutComponent },
-  { path: "contact", component: ContactUsComponent },
-  { path: "itemInfo/:title", component: ItemInfoComponent },
-  { path: "", redirectTo: "/products", pathMatch: "full" }, // Redirect empty path to products
-  { path: "**", redirectTo: "/products" } // Handle unknown paths
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'shop', component: ShopComponent, children: [
+      { path: 'products', component: ProductsComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'about', component: AboutComponent },
+      { path: 'contact', component: ContactUsComponent },
+      { path: 'product/:id', component: ProductDetailsComponent }
+    ]
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

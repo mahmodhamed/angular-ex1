@@ -1,0 +1,71 @@
+<div class="container">
+
+  <div class="buttons-container">
+    <button class="add-product-btn" (click)="openForm()">Add Product</button>
+
+    
+    <div class="dropdown">
+      <button class="dropdown-button">Filter Products</button>
+      <div class="dropdown-content">
+        <a (click)="filterProducts('Makeup')">Makeup</a>
+        <a (click)="filterProducts('Digital')">Digital</a>
+        <a (click)="filterProducts('Kitchen')">Kitchen</a>
+      </div>
+    </div>
+    <a class="clear-filter" (click)="clearFilters()">❌</a>
+
+    <div class="dropdown">
+      <button class="dropdown-button">Sort by price</button>
+      <div class="dropdown-content">
+        <a (click)="sort('asc')">asc</a>
+        <a (click)="sort('sesc')">sesc</a>
+      </div>
+    </div>
+    <a class="clear-filter" (click)="clearFilters()">❌</a>
+  </div>
+
+  
+  
+
+  <!-- Add Product Form -->
+  <div *ngIf="isFormOpened" class="add-form">
+    <app-add-product (submitEvent)="addNewProduct($event)" (closeEvent)="closeForm()"></app-add-product>
+  </div>
+
+  <!-- Edit Product Form -->
+  <app-edit-product 
+    *ngIf="isEditFormOpened && productToEdit" 
+    [product]="productToEdit!" 
+    (submitEvent)="updateProduct($event)" 
+    (closeEvent)="closeEditForm()">
+  </app-edit-product>
+
+  <!-- Product Table -->
+  <table *ngIf="products.length > 0" class="product-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product?.id }}</td>
+        <td>{{ product?.title }}</td>
+        <td>{{ product?.price }}</td>
+        <td>{{ product?.type }}</td>
+        <td>
+          <button class="edit-btn" (click)="editProduct(product)">Edit</button>
+          <button class="delete-btn" (click)="deleteProduct(product.id)">Delete</button>
+          <button class="toggle-btn" (click)="addItem(product)">{{product.selected ? "Remove" : "Add"}}</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Products Message -->
+  <p class="no-products-message" *ngIf="products.length === 0">No products available.</p>
+</div>

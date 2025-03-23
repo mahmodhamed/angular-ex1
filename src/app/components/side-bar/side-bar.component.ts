@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
 export class SideBarComponent {
   activeItemIndex = 0;
   items = [
-    { name: "My Cart", path: "/cart" },
-    { name: "Products", path: "/products" },
-    { name: "About", path: "/about" },
-    { name: "Contact us", path: "/contact" }
+    { name: "My Cart", path: "/shop/cart" },
+    { name: "Products", path: "/shop/products" },
+    { name: "About", path: "/shop/about" },
+    { name: "Contact us", path: "/shop/contact" }
   ];
 }
