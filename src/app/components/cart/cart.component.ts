@@ -25,7 +25,7 @@ export class CartComponent {
 
  getProducts() {
   this.shopService.getProducts().subscribe((data) => {
-    console.log("Received Data:", data); // Check what API returns
+    console.log("Received Data:", data);
     if (Array.isArray(data)) {
       for(let i =0; i<=data.length;i++){
         if(data[i]?.selected==true){
@@ -37,7 +37,7 @@ export class CartComponent {
       
     } else {
       console.error("API did not return an array:", data);
-      this.products = []; // Reset to avoid issues
+      this.products = [];
     }
   }, (error) => {
     console.error("Error fetching products:", error);
@@ -63,7 +63,7 @@ addItem(product: Product){
  }
 
  editProduct(product: Product) {
-  this.productToEdit = { ...product }; // Clone to avoid modifying the original object
+  this.productToEdit = { ...product }; 
   this.isEditFormOpened = true;
 }
 

@@ -9,20 +9,14 @@ import { ShopService } from 'src/app/services/shop.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-
-//   @Input() itemId: number | null = null
-//  @Input() title: String = "default"
-//  @Input() price: number = 0
-//  @Input() selected: boolean = false
-//  @Output() itemClicked: EventEmitter<number> = new EventEmitter<number>()
     
   products: Array<Product> = [];
-  // products: Product [] = [];
   loading = false;
   isFormOpened = false
   isEditFormOpened = false;
   productToEdit: Product | null = null; 
-    constructor(private shopService:ShopService,
+    constructor(
+      private shopService:ShopService,
       private cdr: ChangeDetectorRef,
       private router:Router
 
@@ -30,20 +24,17 @@ export class ProductsComponent {
 
 
   ngOnInit(){
-  
-    
     this.getProducts();
-
   }
 
   getProducts() {
     this.shopService.getProducts().subscribe((data) => {
-      console.log("Received Data:", data); // Check what API returns
+      console.log("Received Data:", data); 
       if (Array.isArray(data)) {
         this.products = data;
       } else {
         console.error("API did not return an array:", data);
-        this.products = []; // Reset to avoid issues
+        this.products = []; 
       }
     }, (error) => {
       console.error("Error fetching products:", error);
@@ -57,15 +48,12 @@ export class ProductsComponent {
     })
    }
 
-  //  addRemoveItem(itemID: any){
-  //   this.shopService.addRemoveItemToCart(itemID)
-  // }
 
   sort(sort: string){
     this.shopService.sortProductsByPrice(sort).subscribe((data) => {
       this.products = data;
       console.log(this.products);
-      this.cdr.detectChanges(); // Force UI update
+      this.cdr.detectChanges(); 
     });
 
   }
@@ -76,7 +64,8 @@ export class ProductsComponent {
       this.cdr.detectChanges();
     });
   }
-  detailsProduct(id : any){
+
+  detailsProduct(id : number){
    this.router.navigate(["/shop/product",id])
   }
   
@@ -105,7 +94,7 @@ export class ProductsComponent {
     this.shopService.getFilteredProducts(type).subscribe((data) => {
       this.products = data;
       console.log(this.products);
-      this.cdr.detectChanges(); // Force UI update
+      this.cdr.detectChanges(); 
     });
   }
   
@@ -118,16 +107,7 @@ export class ProductsComponent {
     
   }
   
-  
-  
 
-  goToTheProductDetails(id:number){
-
-  }
-
-  // addRemoveItem(itemID: any){
-  //   this.shopService.addRemoveItemToCart(itemID)
-  // }
 
   closeForm(){
     this.isFormOpened = false
@@ -150,7 +130,4 @@ export class ProductsComponent {
    
   }
 
-  // filterProducts(type: number){
-  //   this.shopService.filterProducts(type)
-  // }
 }

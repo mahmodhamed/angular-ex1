@@ -1,16 +1,16 @@
 <div *ngIf="product; else loading">
   <div class="product-container">
     <div class="product-header">
-      <h1>{{ product?.title }}</h1>
-      <p class="product-id">Product ID: {{ product?.id }}</p>
+      <h1>{{ product.title }}</h1>
+      <p class="product-id">Product ID: {{ product.id }}</p>
     </div>
 
     <div class="product-content">
       <div class="product-info">
         <h2>Type</h2>
-        <p>{{ product?.type }}</p>
+        <p>{{ product.type }}</p>
 
-        <h3>Price: ${{ product?.price }}</h3>
+        <h3>Price: ${{ product.price }}</h3>
       </div>
     </div>
   </div>

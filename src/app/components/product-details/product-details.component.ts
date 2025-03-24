@@ -19,8 +19,8 @@ export class ProductDetailsComponent {
 
 
   public productId: number;
-  product: Product = new Product();
-
+  // product: Product = new Product();
+  product: Product | null = null; 
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.params["id"];
