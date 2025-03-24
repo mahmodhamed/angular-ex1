@@ -7,9 +7,9 @@
     <div class="dropdown">
       <button class="dropdown-button">Filter Products</button>
       <div class="dropdown-content">
-        <a (click)="filterProducts('Makeup')">Makeup</a>
-        <a (click)="filterProducts('Digital')">Digital</a>
-        <a (click)="filterProducts('Kitchen')">Kitchen</a>
+        <a (click)="filterProducts('makeup')">makeup</a>
+        <a (click)="filterProducts('digital')">digital</a>
+        <a (click)="filterProducts('kitchen')">kitchen</a>
       </div>
     </div>
     <a class="clear-filter" (click)="clearFilters()">❌</a>
@@ -61,6 +61,7 @@
           <button class="edit-btn" (click)="editProduct(product)">Edit</button>
           <button class="delete-btn" (click)="deleteProduct(product.id)">Delete</button>
           <button class="toggle-btn" (click)="addItem(product)">{{product.selected ? "Remove" : "Add"}}</button>
+          <button class="det-btn" (click)="detailsProduct(product.id)">Info</button>
         </td>
       </tr>
     </tbody>

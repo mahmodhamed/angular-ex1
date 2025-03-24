@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
+import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
   selector: 'app-product-details',
@@ -6,5 +9,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent {
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private shopService:ShopService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+
+  public productId: number;
+  product: Product = new Product();
+
+
+  ngOnInit(): void {
+    this.productId = this.route.snapshot.params["id"];
+   this.getOneProduct();
+  }
+
+
+  getOneProduct() {
+    console.log('Fetching product with ID:', this.productId);
+    this.shopService.getOneProduct(this.productId).subscribe((data) => {
+      console.log('Fetched product:', data);
+      this.product = data;
+    });
+  }
+  
+  
 
 }

@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ShopService } from 'src/app/services/shop.service';
 
@@ -22,7 +23,8 @@ export class ProductsComponent {
   isEditFormOpened = false;
   productToEdit: Product | null = null; 
     constructor(private shopService:ShopService,
-      private cdr: ChangeDetectorRef
+      private cdr: ChangeDetectorRef,
+      private router:Router
 
   ) { }
 
@@ -60,6 +62,11 @@ export class ProductsComponent {
   // }
 
   sort(sort: string){
+    this.shopService.sortProductsByPrice(sort).subscribe((data) => {
+      this.products = data;
+      console.log(this.products);
+      this.cdr.detectChanges(); // Force UI update
+    });
 
   }
 
@@ -68,6 +75,9 @@ export class ProductsComponent {
       this.products = data;
       this.cdr.detectChanges();
     });
+  }
+  detailsProduct(id : any){
+   this.router.navigate(["/shop/product",id])
   }
   
 

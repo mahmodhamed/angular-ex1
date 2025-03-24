@@ -120,6 +120,16 @@ export class ShopService {
   // deleteProduct(id: number) {
   //   return this.http.delete<any>(`http://localhost:3000/api/products/${id}`);
   // }
+
+  sortProductsByPrice(sort: any): Observable<any[]> {
+    return this.http.get<any>("http://localhost:3000/api/products?sort="+sort).pipe(
+      map(response => response.data) // Extract the array from response
+    );
+  }
+
+  getOneProduct(id: any): Observable<any> {
+    return this.http.get<any>("http://localhost:3000/api/products/"+id);
+  }
   
   
   
