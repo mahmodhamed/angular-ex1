@@ -62,33 +62,6 @@ addItem(product: Product){
   
  }
 
- editProduct(product: Product) {
-  this.productToEdit = { ...product }; 
-  this.isEditFormOpened = true;
-}
-
-updateProduct(updatedProduct: Product) {
-  console.log("Updated Product:", updatedProduct);
-
-  this.shopService.updateProduct(updatedProduct).subscribe(
-    (response) => {
-      console.log("API Response:", response);
-      this.isEditFormOpened = false; 
-      this.getProducts(); 
-    },
-    (error) => {
-      console.error("Error updating product:", error);
-    }
-  );
-}
-
-
-deleteProduct(id: number) {
-  this.shopService.deleteProduct(id).subscribe((data)=>{
-    this.getProducts();
-  })
-  
-}
 
 closeEditForm() {
   this.isEditFormOpened = false;

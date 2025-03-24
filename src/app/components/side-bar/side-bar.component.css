@@ -1,29 +1,35 @@
-.side-bar{
+.side-bar {
     display: flex;
-    width: 200px;
-    height: 100%;
+    flex-direction: column; /* Arrange items vertically */
+    width: 250px;
+    height: 100vh; /* Full height of the viewport */
     background-color: #7784ff;
+    padding-top: 20px; /* Add some padding to the top */
 }
 
 .list-container ul {
-    position: relative;
-    top: 20px;
-    right: 10px;
-    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 100%;
 }
 
 .list-container li {
-    margin-bottom: 15px; 
-    font-size: 33px; 
-    color:rgb(126, 83, 23);
+    margin-bottom: 20px; /* Adjust space between items */
+    font-size: 20px; /* Smaller font size for better fit */
+    color: rgb(126, 83, 23);
+    padding: 10px 20px; /* Add some padding to make items clickable */
+    border-radius: 10px; /* Rounded corners for list items */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
 }
-
 
 .list-container li:hover {
     cursor: pointer;
+    background-color: #f0f0f0; /* Light background on hover */
+    transform: scale(1.05); /* Slightly enlarge the item */
 }
 
-.active{
+.active {
     background-color: aliceblue;
     border-radius: 10%;
 }

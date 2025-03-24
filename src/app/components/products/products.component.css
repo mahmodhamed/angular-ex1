@@ -1,19 +1,18 @@
-/* General Layout */
 .container {
   width: 100%;
   padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Button Container */
 .buttons-container {
   display: flex;
   align-items: center;
   gap: 15px;
   padding: 20px;
   position: relative;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
-/* Add Product Button */
 .add-product-btn {
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
@@ -37,7 +36,6 @@
   transform: scale(0.95);
 }
 
-/* Filter Dropdown */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -84,9 +82,8 @@
   display: block;
 }
 
-/* Product Table */
 .product-table {
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   margin-top: 20px;
   background-color: #fff;
@@ -113,7 +110,6 @@
   background-color: #f1f1f1;
 }
 
-/* Table Buttons */
 .product-table button {
   border: none;
   padding: 6px 12px;
@@ -140,7 +136,7 @@
 }
 
 .det-btn {
-  background-color: #ffee00;
+  background-color: #ddb226;
   color: white;
 }
 
@@ -148,7 +144,6 @@
   opacity: 0.8;
 }
 
-/* No Products Message */
 .no-products-message {
   text-align: center;
   font-size: 18px;
@@ -156,7 +151,7 @@
   margin-top: 20px;
 }
 
-/* Responsive Design */
+/* Scrollable table on smaller screens */
 @media (max-width: 768px) {
   .buttons-container {
     flex-direction: column;
@@ -174,6 +169,13 @@
     font-size: 12px;
   }
 
+  /* Make the table scrollable horizontally on smaller screens */
+  .product-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
   .clear-filter {
     color: red;
     font-weight: bold;
@@ -182,10 +184,23 @@
     padding: 5px;
     text-align: center;
   }
+
   .clear-filter:hover {
     background-color: #f8d7da;
   }
-  
+}
 
+@media (max-width: 480px) {
+  .buttons-container {
+    gap: 10px;
+  }
+  .add-product-btn {
+    width: 100%; /* Make buttons take full width on small screens */
+    padding: 10px;
+    font-size: 14px;
+  }
 
+  .action{
+    width: 200px;
+  }
 }

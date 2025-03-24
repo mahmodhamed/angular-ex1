@@ -1,7 +1,12 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ShopService } from 'src/app/services/shop.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-products',
@@ -75,19 +80,26 @@ export class ProductsComponent {
     this.isEditFormOpened = true;
   }
 
+
   updateProduct(updatedProduct: Product) {
-    console.log("Updated Product:", updatedProduct);
-  
-    this.shopService.updateProduct(updatedProduct).subscribe(
-      (response) => {
-        console.log("API Response:", response);
+    this.shopService.updateProduct(updatedProduct).subscribe((res) => {
+      console.log(res);
+      if (res) {
+        Swal.fire({
+          icon: "success",
+          title: "Update",
+          text: "product was Updating Successfully...!!!",
+        });
         this.isEditFormOpened = false; 
-        this.getProducts(); 
-      },
-      (error) => {
-        console.error("Error updating product:", error);
-      }
-    );
+            } else {
+        Swal.fire({
+          icon: "error",
+          title: "Ops...",
+          text: "product is already exist!!!",
+        });
+        this.isEditFormOpened = false; 
+            }
+    });
   }
   
   filterProducts(type: string) {
@@ -99,12 +111,29 @@ export class ProductsComponent {
   }
   
   
-
   deleteProduct(id: number) {
-    this.shopService.deleteProduct(id).subscribe((data)=>{
+    Swal.fire({
+      title: "Are you sure you want to delete this product ?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        this.shopService.deleteProduct(id).subscribe((res) => {
+          if (res) {
+            this.getProducts();
+            Swal.fire(
+              "Deleted! has been deleted.",
+              "success"
+            );
+          }
+        });
+      }
       this.getProducts();
-    })
-    
+    });
   }
   
 
@@ -121,13 +150,26 @@ export class ProductsComponent {
   }
 
 
-  addNewProduct(product: any){
-    console.log(product)
-    this.shopService.createNewProduct(product).subscribe((data)=>{
-      this.isFormOpened = false
-      this.getProducts();
-    })
-   
+  addNewProduct(product:any) {
+    this.shopService.createNewProduct(product).subscribe((res) => {
+      if (res) {
+        Swal.fire({
+          icon: "success",
+          title: "Added",
+          text: "product was added Successfully...!!!",
+        });
+        this.isFormOpened = false
+        this.getProducts();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Ops...",
+          text: "product is already exist!!!",
+        });
+        this.isFormOpened = false
+        this.getProducts();
+      }
+    });
   }
 
 }

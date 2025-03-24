@@ -70,8 +70,12 @@ export class ShopService {
   }
 
   getOneProduct(id: any): Observable<any> {
-    return this.http.get<any>("http://localhost:3000/api/products/"+id);
+    return this.http.get<any>("http://localhost:3000/api/products/" + id).pipe(
+      map(response => response.data) // Extract the product data from the response
+    );
   }
+  
+  
   
   
   

@@ -27,14 +27,25 @@ export class ProductDetailsComponent {
    this.getOneProduct();
   }
 
-
   getOneProduct() {
     console.log('Fetching product with ID:', this.productId);
-    this.shopService.getOneProduct(this.productId).subscribe((data) => {
-      console.log('Fetched product:', data);
-      this.product = data;
-    });
+    this.shopService.getOneProduct(this.productId).subscribe(
+      (data) => {
+        console.log('Fetched product:', data);
+        this.product = data;  // Update the product data
+        this.cdr.detectChanges();  // Manually trigger change detection
+      },
+      (error) => {
+        console.error('Error fetching product:', error);
+        alert('Failed to load product data');
+      }
+    );
   }
+  
+  
+  
+  
+  
   
   
 
