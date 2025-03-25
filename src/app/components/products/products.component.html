@@ -1,4 +1,94 @@
-<div class="container">
+<div class="container mat-elevation-z2 p-4">
+  <div class="buttons-container d-flex align-items-center gap-3">
+    <button mat-raised-button color="primary" (click)="openForm()">Add Product</button>
+    
+    <mat-menu #filterMenu="matMenu">
+      <button mat-menu-item (click)="filterProducts('makeup')">Makeup</button>
+      <button mat-menu-item (click)="filterProducts('digital')">Digital</button>
+      <button mat-menu-item (click)="filterProducts('kitchen')">Kitchen</button>
+    </mat-menu>
+    <button mat-raised-button [matMenuTriggerFor]="filterMenu">Filter Products</button>
+    <button mat-icon-button (click)="clearFilters()">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+    <mat-menu #sortMenu="matMenu">
+      <button mat-menu-item (click)="sort('asc')">Ascending</button>
+      <button mat-menu-item (click)="sort('desc')">Descending</button>
+    </mat-menu>
+    <button mat-raised-button [matMenuTriggerFor]="sortMenu">Sort by Price</button>
+  </div>
+
+  <div *ngIf="isFormOpened" class="add-form">
+    <app-add-product (submitEvent)="addNewProduct($event)" (closeEvent)="closeForm()"></app-add-product>
+  </div>
+
+  <app-edit-product 
+    *ngIf="isEditFormOpened && productToEdit" 
+    [product]="productToEdit" 
+    (submitEvent)="updateProduct($event)" 
+    (closeEvent)="closeEditForm()">
+  </app-edit-product>
+
+  <mat-table #table [dataSource]="products" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.id }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.title }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.price }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.type }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <button mat-icon-button color="primary" (click)="editProduct(product)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteProduct(product.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="addItem(product)">
+          <mat-icon>{{ product.selected ? 'remove_circle' : 'add_circle' }}</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="detailsProduct(product.id)">
+          <mat-icon>info</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['id', 'title', 'price', 'type', 'actions']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['id', 'title', 'price', 'type', 'actions']"></mat-row>
+  </mat-table>
+
+  <p class="no-products-message" *ngIf="products.length === 0">No products available.</p>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 50, 100]" aria-label="Select page of products"></mat-paginator>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
 
   <div class="buttons-container">
     <button class="add-product-btn" (click)="openForm()">Add Product</button>
@@ -65,68 +155,4 @@
   </table>
 
   <p class="no-products-message" *ngIf="products.length === 0">No products available.</p>
-</div>
-
-  <!-- <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
-    <ng-container matColumnDef="#">
-      <mat-header-cell *matHeaderCellDef mat-sort-header># </mat-header-cell>
-      <mat-cell *matCellDef="let row; let i = index">{{ i + 1 }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Id
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ row.id }} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Title
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Price
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ row.price }} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="action">
-      <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <button
-          mat-icon-button
-          color="warn"
-          title="Delete"
-          (click)="deleteProduct(row)"
-        >
-          <mat-icon aria-label="delete">delete </mat-icon>
-        </button>
-        <button
-          mat-icon-button
-          class="btn btn-outline-warning"
-          (click)="aboutProduct(row.id)"
-        >
-          <mat-icon aria-label="description">description </mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"> </mat-header-row>
-    <mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      [style.cursor]="'pointer'"
-      matRipple
-    >
-    </mat-row>
-  </mat-table>
-  <div *ngIf="isTblLoading" class="tbl-spinner">
-    <mat-progress-spinner
-      color="primary"
-      [diameter]="40"
-      mode="indeterminate"
-    >
-    </mat-progress-spinner>
-  </div>
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 50, 100]"
-    aria-label="Select page of products"
-  ></mat-paginator> -->
+</div> -->

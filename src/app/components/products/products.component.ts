@@ -91,6 +91,7 @@ export class ProductsComponent {
           text: "product was Updating Successfully...!!!",
         });
         this.isEditFormOpened = false; 
+        this.getProducts();
             } else {
         Swal.fire({
           icon: "error",
@@ -98,6 +99,7 @@ export class ProductsComponent {
           text: "product is already exist!!!",
         });
         this.isEditFormOpened = false; 
+        this.getProducts();
             }
     });
   }
