@@ -20,7 +20,7 @@
           <td>{{ product.price }}</td>
           <td>{{ product.type }}</td>
           <td>
-            <button (click)="addItem(product)">{{ product.selected ? 'Remove' : 'Add' }}</button>
+            <button (click)="removeItem(product)">{{ product.selected ? 'Remove' : 'Add' }}</button>
           </td>
         </tr>
       </tbody>

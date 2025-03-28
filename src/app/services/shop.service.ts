@@ -15,7 +15,6 @@ export class ShopService {
 
   constructor(private http: HttpClient) {
     console.log("FETCHING")
-    // this.getProducts()
     this.getCartTotal()
   }
 
@@ -38,9 +37,7 @@ export class ShopService {
   }
 
   getCartTotal(){
-    this.http.get<any>('http://localhost:3000/api/cart/total').subscribe((data) => {
-      this.totalPayment.next(data.total)
-    })
+    return this.http.get<any>('http://localhost:3000/api/cart/total')
   }
 
   

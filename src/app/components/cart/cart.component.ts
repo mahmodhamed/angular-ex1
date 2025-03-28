@@ -16,12 +16,16 @@ export class CartComponent {
  products: Array<Product> = [];
 
  ngOnInit(){
-  // this.shopService.totalPayment.subscribe((data)=>{
-  //   this.total = data 
-  // })
+ this.getTotal();
   this.getProducts();
  }
 
+
+ getTotal(){
+  this.shopService.getCartTotal().subscribe((data)=>{
+    this.total = data.total 
+  })
+ }
 
  getProducts() {
   this.shopService.getProducts().subscribe((data) => {
@@ -30,9 +34,7 @@ export class CartComponent {
       for(let i =0; i<=data.length;i++){
         if(data[i]?.selected==true){
           this.products.push(data[i])
-          this.total+=data[i].price
         }
-
       }
       
     } else {
@@ -45,21 +47,17 @@ export class CartComponent {
 }
 
 
-addItem(product: Product){
+removeItem(product: Product){
   console.log(product.id)
   console.log(product.selected)
   this.shopService.addRemoveItemToCart(product).subscribe((data)=>{
     for(let i=0;i<this.products.length;i++){
       if(this.products[i].selected==false){
-        this.total-=this.products[i].price
         this.products.splice(i,1)
-
       }
-
+      this.getTotal();
     }
-  })
-  
-  
+  }) 
  }
 
 
